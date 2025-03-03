@@ -40,15 +40,15 @@ std::vector<std::string> System::get_orginal_names() {
 int System::write_ini(){
     std::ofstream ini_file("system.ini");
     if (!ini_file) {
-        std::cerr << "Error opening file for writing." << std::endl;
+        std::cerr << "Error opening system.ini for writing." << std::endl;
         return ERR_FILE;
     }
 
-    ini_file << n_Specs << std::endl;
+    ini_file << "Number of Spectrums : " << n_Specs << std::endl;
 
     ini_file.close();
     if (!ini_file) {
-        std::cerr << "Error closing file." << std::endl;
+        std::cerr << "Error closing system.ini file." << std::endl;
         return ERR_FILE;
     }
     return ERR_SUCCESS;
@@ -57,21 +57,26 @@ int System::write_ini(){
 int System::read_ini(){
     std::ifstream ini_file("system.ini");
     if (!ini_file) {
-        std::cerr << "Error opening file for reading." << std::endl;
+        std::cerr << "Error opening system.ini for reading." << std::endl;
+        std::cout << "Creating a new system.ini file..." << std::endl;
+        write_ini();
         return ERR_FILE;
     }
 
-    ini_file >> n_Specs;
+    std::string line;
+    std::getline(ini_file, line);
+    n_Specs = std::stoi(line.substr(line.find(":") + 1));
 
     ini_file.close();
     if (!ini_file) {
-        std::cerr << "Error closing file." << std::endl;
+        std::cerr << "Error closing system.ini file." << std::endl;
         return ERR_FILE;
     }
     return ERR_SUCCESS;
 }
 
 System::System(){
+    n_Specs = 0;
     std::cout << "System is initializing..." << std::endl;
     this->read_ini();
     std::cout << n_Specs << std::endl;
@@ -109,3 +114,47 @@ int System::rm_two_line(std::string file_name){
     out_file.close();
     return ERR_SUCCESS;
 }
+
+int System::read_spectrum(){
+    std::vector<std::string> file_names = get_orginal_names();
+    Spectrums.resize(file_names.size());
+    preprocess_cutoff(file_names);
+    for (int i = 0; i < file_names.size(); i++) {
+        Spectrums[i].read_spectrum(std::string(DATA_FILE_PATH) + "/" + file_names[i]);
+        //spectrums[i].show_info();
+    }
+    std::cout << "Read " << file_names.size() << " files complete." << std::endl;
+    return ERR_SUCCESS;
+}
+
+int System::read_csv(){
+    return ERR_SUCCESS;
+}
+
+int System::show_info(){
+    return ERR_SUCCESS;
+}
+
+int System::show_detail(){
+    return ERR_SUCCESS;
+}
+
+int System::save_csv(){
+    std::ofstream out_file("database/data.csv");
+    if (!out_file) {
+        std::cerr << "Error opening output file: database/data.csv" << std::endl;
+        std::cout << "Creating a new database/data.csv file..." << std::endl;
+        out_file.open("database/data.csv");
+        if (!out_file) {
+            std::cerr << "Error opening output file: database/data.csv" << std::endl;
+            return ERR_FILE;
+        }
+        return ERR_FILE;
+    }
+
+    for (int i = 0; i < Spectrums.size(); i++) {
+        out_file << Spectrums[i].name
+    }
+    return ERR_SUCCESS;
+}
+

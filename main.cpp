@@ -1,46 +1,66 @@
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <vector>
-
 #include "Spectrum.h"
 #include "System.h"
-#include "Spectrum.cpp"
-#include "System.cpp"
 #include "Settings.h"
 
-// 1. class definition need to be optimized
 // 2. peak position should be recorded speraterly both in index && wavelength
 // 3. sort agrithom is bubble sort, which is very bad
 // 4. it can not be interacted
 // 5. read data is probably inefficient
 // 6. the read_spectrum sucks ***
 
-#if 0
+#if 1
 int main() {
-    SpecSeries organic(NUM_OF_ORGANIC_MATERIAL, "Organic Materials", "25 organic materials");
-    Spectrum tmp;
+    System sys;
 
-    for (int i = 0; i < NUM_OF_ORGANIC_MATERIAL; i++) {
-        read_spectrum(FILE_PATH + std::to_string(i + INDEX_OFFSET_ + 1) + std::string(".txt"), tmp);
-        organic.set_spectrum(i, tmp);
-        organic.series[i].name = "ID " + std::to_string(i + 1 + INDEX_OFFSET_);
-    }
-
-    //organic.cut_off();
-    organic.show_info();
-    organic.sort_by_first_peak();
-    organic.peak_info();
-    organic.normalize();
-    organic.to_csv("organic.csv");
-    std::cout << "Done!" << std::endl;
+    int choice;
+    //while(1)
+        sys.print_menu();
+        std::cout << "Please select the operation: ";
+        std::cin >> choice;
+        switch(choice)
+        {
+            case 1:
+                sys.read_spectrum();
+                break;
+            case 2:
+                sys.read_csv();
+                break;
+            case 3:
+                sys.show_info();
+                break;
+            case 4:
+                sys.show_detail();
+                break;
+            case 5:
+                sys.save_csv();
+                break;
+            case 6:
+                return 0;
+            default:
+                std::cout << "Invalid choice!" << std::endl;
+                break;
+        }
     return 0;
 }
+
+#elif 0
+int main(){
+    std::cout << std::endl;
+    //System sys;
+    int choice;
+    //sys.preprocess_cutoff(sys.get_orginal_names());
+    Spectrum tmp;
+    tmp.read_spectrum(DATA_FILE_PATH + std::string("/26.txt"));
+    tmp.show_info();
+    std::cout << "That's the end!" << std::endl; 
+}  
 
 #else
 int main(){
     System sys;
-    int choice;
-    //sys.preprocess_cutoff(sys.get_orginal_names());
-}  
+    //sys.print_menu();
+
+    
+    return 0;
+}
 #endif

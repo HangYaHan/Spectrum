@@ -1,10 +1,12 @@
-#define FILE_PATH std::string("data\\")
+#ifndef SETTINGS_H
+#define SETTINGS_H
+#pragma once
 #define EPSILON 0.0001
 
 #define INDEX_OFFSET_ 25 // Number of specs that have been done
 #define NUM_OF_ORGANIC_MATERIAL 33
-#define START_WL_need_upgrade 300
-#define END_WL_need_upgrade 1002
+#define START_WL 300
+#define END_WL 1000
 #define JUMP_WL_need_upgrade 0
 
 #define ERR_SUCCESS 0 // Operation successful
@@ -21,3 +23,5 @@
 #define ORGINAL_FILE_PATH "./orginal"
 #define DATA_FILE_PATH "./data"
 #define DATABASE_PATH "./database"
+
+#endif // SETTINGS_H
