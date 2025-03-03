@@ -62,7 +62,7 @@ int main(){
 int main(){
     System sys;
     sys.read_spectrum();
-
+     sys.save_csv();
     
     return 0;
 }

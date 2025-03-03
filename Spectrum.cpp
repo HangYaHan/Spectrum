@@ -30,7 +30,7 @@ int Spectrum::read_spectrum(const std::string& file_name) {
     // pre-process
     judge_step();
     find_peak();
-    normalize();
+    //normalize();
 
     file.close();
 

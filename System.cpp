@@ -86,7 +86,7 @@ System::System(){
 
 int System::preprocess_cutoff(std::vector<std::string> file_names){
     for (std::vector<std::string>::iterator it = file_names.begin(); it != file_names.end(); it++) {
-        rm_two_line(*it);
+            rm_two_line(*it);
     }
     return ERR_SUCCESS;
 }
@@ -105,7 +105,7 @@ int System::rm_two_line(std::string file_name){
     std::string line;
     int count = 0;
     while (std::getline(in_file, line)) {
-        if (count > 1) {
+        if (count > 51) {
             out_file << line << std::endl;
         }
         count++;
@@ -159,7 +159,12 @@ int System::save_csv(){
 
     out_file << std::endl;
 
-    for (int i = 0; )
+    for (int i = 0; i < (END_WL-START_WL)/STEP_WL; i++) { 
+        for (int j = 0; j < Spectrums.size(); j++) {
+            out_file << Spectrums[j].data[i] << ",";
+        }
+        out_file << std::endl;
+    }
     return ERR_SUCCESS;
 }
 

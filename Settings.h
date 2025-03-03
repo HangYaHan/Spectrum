@@ -7,6 +7,7 @@
 #define NUM_OF_ORGANIC_MATERIAL 33
 #define START_WL 300
 #define END_WL 1000
+#define STEP_WL 2
 #define JUMP_WL_need_upgrade 0
 
 #define ERR_SUCCESS 0 // Operation successful
