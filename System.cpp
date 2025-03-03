@@ -118,11 +118,12 @@ int System::rm_two_line(std::string file_name){
 int System::read_spectrum(){
     std::vector<std::string> file_names = get_orginal_names();
     Spectrums.resize(file_names.size());
-    preprocess_cutoff(file_names);
+    preprocess_cutoff(file_names);  //cut off the first two lines of the original files
     for (int i = 0; i < file_names.size(); i++) {
         Spectrums[i].read_spectrum(std::string(DATA_FILE_PATH) + "/" + file_names[i]);
         //spectrums[i].show_info();
     }
+    n_Specs += Spectrums.size();
     std::cout << "Read " << file_names.size() << " files complete." << std::endl;
     return ERR_SUCCESS;
 }
@@ -153,8 +154,12 @@ int System::save_csv(){
     }
 
     for (int i = 0; i < Spectrums.size(); i++) {
-        out_file << Spectrums[i].name
+        out_file << Spectrums[i].id << ",";
     }
+
+    out_file << std::endl;
+
+    for (int i = 0; )
     return ERR_SUCCESS;
 }
 

@@ -8,12 +8,12 @@
 // 5. read data is probably inefficient
 // 6. the read_spectrum sucks ***
 
-#if 1
+#if 0
 int main() {
     System sys;
-
     int choice;
-    //while(1)
+
+    while(1){
         sys.print_menu();
         std::cout << "Please select the operation: ";
         std::cin >> choice;
@@ -40,6 +40,9 @@ int main() {
                 std::cout << "Invalid choice!" << std::endl;
                 break;
         }
+
+        system("cls");
+    }   
     return 0;
 }
 
@@ -58,7 +61,7 @@ int main(){
 #else
 int main(){
     System sys;
-    //sys.print_menu();
+    sys.read_spectrum();
 
     
     return 0;

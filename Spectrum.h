@@ -10,11 +10,16 @@
 
 class Spectrum {
     public:
+        // general information
         int id; //the name of file
         int first_peak_pos;
         int FWHM_first_peak; // real value
-        int step;
         std::vector<float> data;
+
+        // measure information
+        int start_wl;
+        int end_wl;
+        int step;
 
         Spectrum();
         int read_spectrum(const std::string& file_name);

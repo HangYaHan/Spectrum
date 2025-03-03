@@ -16,7 +16,7 @@
 
 class System {
     public:
-        int n_Specs;
+        int n_Specs = 0;
         std::vector<std::string> file_names;
         std::vector<Spectrum> Spectrums;
 
