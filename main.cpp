@@ -2,6 +2,7 @@
 #include "System.h"
 #include "Settings.h"
 
+
 // 2. peak position should be recorded speraterly both in index && wavelength
 // 3. sort agrithom is bubble sort, which is very bad
 // 4. it can not be interacted
@@ -61,9 +62,15 @@ int main(){
 #else
 int main(){
     System sys;
+    sys.read_csv();
+    sys.show_info();
+
+
     sys.read_spectrum();
-     sys.save_csv();
+    sys.show_info();
+
     
+    sys.save_csv();
     return 0;
 }
 #endif
